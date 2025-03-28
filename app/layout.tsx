@@ -25,11 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="relative min-h-screen h-full">
         <header>
-          <Navbar/>
+          <Navbar />
         </header>
         {children}
+        <footer className="absolute top-full flex justify-center items-center w-full">
+          <div className="p-3 text-center">
+            © 2025 Techcik, All rights reserved.
+          </div>
+        </footer>
       </body>
     </html>
   );

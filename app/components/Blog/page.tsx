@@ -1,18 +1,30 @@
-import React from 'react'
+import React from "react";
 
-const Blog = ({title, author, date, content}:{title:string,author:string,date:string,content:string}) => {
+const Blog = ({
+  title,
+  author,
+  date,
+  content,
+}: {
+  title: string;
+  author: string;
+  date: string;
+  content: string;
+}) => {
   return (
-    <div className='m-2 p-2 shadow-xl shadow-blue-200 mt-4 flex justify-center md:w-3/5'>
-        <div className='w-full'>
-            <div className='w-full text-center'>Title</div>
-            <div>
-                <div>Author</div>
-                <div>27/03/25</div>
-            </div>
-           
-        </div>
+    <div className="flex justify-center flex-col">
+      <div className="w-full mt-1 mb-1">
+        <div className="w-full text-center font-bold">{title}</div>
+        <ul className="list-inside list-disc flex gap-x-[1em] p-1 border-b">
+            <li>{author}</li>
+            <li>{date}</li>
+        </ul>
+      </div>
+      <div className="mt-1 mb-1">
+        {content}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Blog
+export default Blog;
