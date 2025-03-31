@@ -7,8 +7,8 @@ export default function AndroidLayout({
 }>) {
   return (
     <div>
-        <PageHeader title="android"/>
-        {children}
+        <PageHeader title="Android"/>
+        {children} 
     </div>
   );
 }
