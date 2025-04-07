@@ -1,10 +1,9 @@
 import React from 'react'
+import BlogListPage from '../components/BlogListPage/BlogListPage'
 
 const tech = () => {
   return (
-    <div>
-      
-    </div>
+    <BlogListPage category={'tech'}/>
   )
 }
 

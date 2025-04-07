@@ -2,8 +2,9 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
+import {useEffect} from 'react'
+import { useActiveNav } from '../hooks/useActiveNav'
+import { usePathname } from 'next/navigation'
 const navigation = [
   { name: 'Home', href: '/', current: true },
   { name: 'Android', href: '/android', current: false },
@@ -16,13 +17,15 @@ function classNames(...classes:any) {
 }
 
 export default function Navbar() {
-  const router = useRouter();
-  console.log(usePathname());
-  
+  const pathname = usePathname();
+  const {activeNav, setActiveNav} = useActiveNav();
   const handleCurrent = (current:string) => {
-    navigation.map((item)=> item.name === current ? item.current = true : item.current = false)
+    setActiveNav(current);
   }
-  console.log()
+  useEffect(()=>{
+    const formattedNav = pathname.replace("/", "").charAt(0).toUpperCase() + pathname.slice(2);
+    setActiveNav(formattedNav || "Home");
+  },[activeNav,pathname])
   return (
     <Disclosure as="nav" className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -51,9 +54,9 @@ export default function Navbar() {
                     key={item.name}
                     href={item.href}
                     onClick={() =>handleCurrent(item.name)}
-                    aria-current={item.current ? 'page' : undefined}
+                    aria-current={item.name === activeNav ? 'page' : undefined}
                     className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      item.name === activeNav ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                       'rounded-md px-3 py-2 text-sm font-medium',
                     )}
                   >
@@ -72,9 +75,9 @@ export default function Navbar() {
               key={item.name}
               as={Link}
               href={item.href}
-              aria-current={item.current ? 'page' : undefined}
+              aria-current={item.name === activeNav ? 'page' : undefined}
               className={classNames(
-                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                item.name === activeNav ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                 'block rounded-md px-3 py-2 text-base font-medium',
               )}
             >

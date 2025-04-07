@@ -31,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative min-h-screen h-full">
+        <ActiveNavProvider>
         <header>
           <Navbar />
         </header>
@@ -38,9 +39,7 @@ export default function RootLayout({
         <div className="flex">
           <div className="hidden md:block md:flex-1/3 mr-5"></div>
           <div className="w-full md:flex-2/3">
-          <ActiveNavProvider>
             {children}
-          </ActiveNavProvider>
           </div>
           <div className="hidden md:block md:flex-1/3 ml-5 m-2">
             <Search/>
@@ -59,6 +58,7 @@ export default function RootLayout({
             © 2025 Techcik, All rights reserved.
           </div>
         </footer>
+        </ActiveNavProvider>
       </body>
     </html>
   );
